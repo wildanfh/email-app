@@ -5,6 +5,7 @@ function ContactForm() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -23,7 +24,9 @@ function ContactForm() {
       )
       .then(
         (result) => {
-          console.log(result.text);
+          const successMessage = 'Email Berhasil Dikirim!';
+          // Update state to show success message
+          setSuccessMessage(successMessage);
           // Clear form fields
           setName("");
           setEmail("");
@@ -38,7 +41,9 @@ function ContactForm() {
   return (
     <div className="flex justify-center items-center h-screen">
       <div className="bg-white rounded-lg shadow p-6 w-full max-w-md">
-        <h1 className="text-3xl text-gray-800 font-bold text-center py-4">Send to Email</h1>
+        <h1 className="text-3xl text-gray-800 font-bold text-center py-4">
+          Send to Email
+        </h1>
         <form onSubmit={handleSubmit} className="max-w-md mx-auto">
           <div className="mb-4">
             <label
@@ -88,6 +93,7 @@ function ContactForm() {
               rows="5"
             ></textarea>
           </div>
+          {successMessage && <p className="text-green-500 text-center font-semibold text-xl py-2">{successMessage}</p>}
           <div className="flex items-center justify-center">
             <button
               className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
@@ -97,6 +103,7 @@ function ContactForm() {
             </button>
           </div>
         </form>
+        
       </div>
     </div>
   );
